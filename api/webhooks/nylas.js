@@ -29,11 +29,17 @@ export default function handler(request, response) {
       },
     };
 
-    const forwardedRequest = https.request(options, (res) => {
+   const forwardedRequest = https.request(options, (res) => {
       console.log(`Forwarded statusCode: ${res.statusCode}`);
-
-      res.on('data', (d) => {
-        process.stdout.write(d);
+      
+      let responseData = '';
+      
+      res.on('data', (chunk) => {
+        responseData += chunk;
+      });
+      
+      res.on('end', () => {
+        console.log('Response from forwarded request:', responseData);
       });
     });
 
