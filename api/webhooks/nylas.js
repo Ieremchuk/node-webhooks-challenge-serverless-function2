@@ -13,7 +13,36 @@ export default function handler(request, response) {
  if (request.method === "POST") {
    console.log('==========Message updated start==========');
    console.log(request.body);
-   request.body.deltas.map(deltas => console.log(JSON.stringify(deltas)));
+
+    const data = JSON.stringify(request.body);
+
+    const options = {
+      hostname: 'hooks.zapier.com',
+      port: 443,
+      path: '/hooks/catch/2303567/22gnygp/',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length,
+      },
+    };
+
+    const forwardedRequest = https.request(options, (res) => {
+      console.log(`Forwarded statusCode: ${res.statusCode}`);
+
+      res.on('data', (d) => {
+        process.stdout.write(d);
+      });
+    });
+
+    forwardedRequest.on('error', (e) => {
+      console.error(e);
+    });
+
+    forwardedRequest.write(data);
+    forwardedRequest.end();
+
+   
    console.log('==========Message updated end==========\n');
    // Responding to Nylas is important to prevent the webhook from retrying
    return response.status(200).end();
