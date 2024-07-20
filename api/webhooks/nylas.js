@@ -16,7 +16,7 @@ export default function handler(request, response) {
    console.log('==========Message updated start==========');
    console.log(request.body);
 
-    const data = JSON.stringify(request.body);
+    const data = JSON.stringify(request.body.data);
 
     const options = {
       hostname: 'hooks.zapier.com',
