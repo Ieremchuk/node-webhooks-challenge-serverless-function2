@@ -36,6 +36,7 @@ export default function handler(request, response) {
       
       res.on('data', (chunk) => {
         responseData += chunk;
+        console.log(responseData);
       });
       
       res.on('end', () => {
