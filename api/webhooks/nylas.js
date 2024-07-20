@@ -12,7 +12,8 @@ export default function handler(request, response) {
     return response.send(request.query.challenge);
   }
 
- if (request.method === "POST") {
+ 
+  if (request.method === "POST") {
    console.log('==========Message updated start==========');
    console.log(request.body);
 
@@ -45,9 +46,10 @@ export default function handler(request, response) {
     });
 
     forwardedRequest.on('error', (e) => {
-      console.error(e);
+      console.log(e);
     });
 
+    console.log(data);
     forwardedRequest.write(data);
     forwardedRequest.end();
 
