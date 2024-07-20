@@ -12,6 +12,7 @@ export default function handler(request, response) {
 
  if (request.method === "POST") {
    console.log('==========Message updated start==========');
+   console.log(request.body);
    request.body.deltas.map(deltas => console.log(JSON.stringify(deltas)));
    console.log('==========Message updated end==========\n');
    // Responding to Nylas is important to prevent the webhook from retrying
