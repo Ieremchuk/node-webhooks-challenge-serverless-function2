@@ -26,6 +26,7 @@ export default function handler(request, response) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Content-Length': data.length,
       },
     };
