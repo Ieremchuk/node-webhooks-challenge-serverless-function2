@@ -41,23 +41,22 @@ export default function handler(request, response) {
       
       res.on('end', () => {
         console.log('Response from forwarded request:', responseData);
+        response.status(200).end();
       });
     });
 
     forwardedRequest.on('error', (e) => {
       console.log(e);
+      response.status(200).end();
     });
 
     console.log(data);
     forwardedRequest.write(data);
-    forwardedRequest.end(() => {
-       console.log('req end')
-   });
+    forwardedRequest.end();
 
-   
    console.log('==========Message updated end==========\n');
    // Responding to Nylas is important to prevent the webhook from retrying
-   return response.status(200).end();
+   
  }
 
 }
