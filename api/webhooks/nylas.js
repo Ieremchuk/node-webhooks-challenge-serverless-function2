@@ -15,9 +15,7 @@ export default function handler(request, response) {
  
   if (request.method === "POST") {
    console.log('==========Message updated start==========');
-   console.log(request.body);
-
-    const data = JSON.stringify(request.body.data);
+   const data = JSON.stringify(request.body.data);
 
     const options = {
       hostname: 'hooks.zapier.com',
@@ -52,7 +50,9 @@ export default function handler(request, response) {
 
     console.log(data);
     forwardedRequest.write(data);
-    forwardedRequest.end();
+    forwardedRequest.end(() => {
+       console.log('req end')
+   });
 
    
    console.log('==========Message updated end==========\n');
