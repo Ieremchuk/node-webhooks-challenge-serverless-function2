@@ -8,7 +8,7 @@ export default function handler(request, response) {
     console.log(`Received challenge code! - ${request.query.challenge}`);
     console.log(`Now returning challenge code! - ${request.query.challenge}`);
     // we need to enable the webhook by responding with the challenge parameter
-    // CHALLENGE_STRING
+    // CHALLENGE_STRING test
     return response.send(request.query.challenge);
   }
 
